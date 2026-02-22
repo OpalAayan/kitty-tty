@@ -1,0 +1,12 @@
+# Compiled binaries
+kitty_tty
+drm_canvas
+evdev_test
+pty_engine
+
+# Object files
+*.o
+
+# Logs
+*.log
+/tmp/kitty-tty.log
