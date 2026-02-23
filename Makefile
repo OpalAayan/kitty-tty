@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────
-#  kitty-tty Makefile — Release
+#  opalterm Makefile — Release
 # ─────────────────────────────────────────────────────────────────
 
 CC       := gcc
@@ -19,19 +19,19 @@ DRM_LIBS    := $(shell pkg-config --libs libdrm)
 
 .PHONY: all clean install uninstall
 
-all: kitty_tty
+all: opalterm
 
-kitty_tty: kitty_tty.c
+opalterm: opalterm.c
 	$(CC) $(CFLAGS) $(FT2_CFLAGS) $(DRM_CFLAGS) \
 		-o $@ $< \
 		-lutil -lvterm $(FT2_LIBS) $(DRM_LIBS)
 
-install: kitty_tty
+install: opalterm
 	install -d $(DESTDIR)$(BINDIR)
-	install -m 755 kitty_tty $(DESTDIR)$(BINDIR)/kitty_tty
+	install -m 755 opalterm $(DESTDIR)$(BINDIR)/opalterm
 
 uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/kitty_tty
+	rm -f $(DESTDIR)$(BINDIR)/opalterm
 
 clean:
-	rm -f kitty_tty
+	rm -f opalterm

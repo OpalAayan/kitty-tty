@@ -1,4 +1,4 @@
-# kitty-tty
+# opalterm
 
 Bare-metal DRM terminal emulator written in pure C. Renders directly to
 the Linux framebuffer using KMS/DRM, with FreeType font rasterization
@@ -64,45 +64,45 @@ Must run from a Linux TTY (not a terminal emulator). Requires root for
 DRM access.
 
 ```
-sudo ./kitty_tty
+sudo ./opalterm
 ```
 
 The first instance starts the server. Subsequent invocations send IPC
 commands:
 
 ```
-./kitty_tty --new-tab       # Open a new tab
-./kitty_tty --next          # Switch to next tab
-./kitty_tty --prev          # Switch to previous tab
-./kitty_tty --split-v       # Split active tab vertically
-./kitty_tty --left          # Focus left pane
-./kitty_tty --right         # Focus right pane
-./kitty_tty --help          # Show help
+./opalterm --new-tab       # Open a new tab
+./opalterm --next          # Switch to next tab
+./opalterm --prev          # Switch to previous tab
+./opalterm --split-v       # Split active tab vertically
+./opalterm --left          # Focus left pane
+./opalterm --right         # Focus right pane
+./opalterm --help          # Show help
 ```
 
 Short flags: `-nt`, `-n`, `-p`, `-s`, `-l`, `-r`, `-h`.
 
 ## Configuration
 
-Edit the `AppConfig` struct in `kitty_tty.c`:
+Edit the `AppConfig` struct in `opalterm.c`:
 
 - `font_size` -- pixel size (default: 20)
 - Colors use 0x00RRGGBB format (Nord palette by default)
 
 Fonts are auto-detected from a built-in fallback list. To change the
-priority order, edit the `font_fallbacks[]` array in `kitty_tty.c`.
+priority order, edit the `font_fallbacks[]` array in `opalterm.c`.
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `kitty_tty.c` | Main terminal emulator |
+| `opalterm.c` | Main terminal emulator |
 | `Makefile` | Build configuration |
 
 ## Logs
 
-Runtime logs are written to `/tmp/kitty-tty.log`.
-IPC socket is per-user at `/tmp/kitty_tty_<uid>.sock`.
+Runtime logs are written to `/tmp/opalterm.log`.
+IPC socket is per-user at `/tmp/opalterm_<uid>.sock`.
 
 ## License
 

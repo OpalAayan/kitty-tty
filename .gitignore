@@ -1,5 +1,5 @@
 # Compiled binaries
-kitty_tty
+opalterm
 drm_canvas
 evdev_test
 pty_engine
@@ -9,4 +9,4 @@ pty_engine
 
 # Logs
 *.log
-/tmp/kitty-tty.log
+/tmp/opalterm.log

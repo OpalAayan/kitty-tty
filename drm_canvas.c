@@ -42,7 +42,7 @@
 #define FG_COLOR 0x00ECEFF4 /* Nord Snow Storm white              */
 
 /* The text we'll paint onto the framebuffer                        */
-#define DEMO_TEXT "kitty-tty pure C"
+#define DEMO_TEXT "opalterm pure C"
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 

@@ -1,14 +1,14 @@
 #define _GNU_SOURCE
 /*
- * kitty_tty.c — Bare-metal DRM terminal emulator.
+ * opalterm.c — Bare-metal DRM terminal emulator.
  *
  * Single-file C program: DRM framebuffer, FreeType glyph rendering,
  * libvterm terminal emulation, tabbed sessions with vertical splits,
  * shadow-buffered two-pass rendering, and Unix socket IPC.
  *
  * Compile: make
- * Run:     sudo ./kitty_tty
- * Log:     /tmp/kitty-tty.log
+ * Run:     sudo ./opalterm
+ * Log:     /tmp/opalterm.log
  */
 
 #include <errno.h>
@@ -46,12 +46,12 @@
 #define IPC_READ_TIMEOUT_MS 200
 
 static void get_socket_path(char *buf, size_t size) {
-  snprintf(buf, size, "/tmp/kitty_tty_%d.sock", getuid());
+  snprintf(buf, size, "/tmp/opalterm_%d.sock", getuid());
 }
 
 /* -- Logging ------------------------------------------------------ */
 
-#define LOG_PATH "/tmp/kitty-tty.log"
+#define LOG_PATH "/tmp/opalterm.log"
 
 static FILE *g_logfile = NULL;
 
@@ -980,11 +980,11 @@ static void print_help(void) {
   char sock_path[64];
   get_socket_path(sock_path, sizeof(sock_path));
   fprintf(stdout,
-          "kitty_tty -- Bare-metal DRM terminal emulator\n"
+          "opalterm -- Bare-metal DRM terminal emulator\n"
           "\n"
           "Usage:\n"
-          "  sudo ./kitty_tty              Start the terminal (server mode)\n"
-          "  ./kitty_tty <command>         Send IPC command to running server\n"
+          "  sudo ./opalterm              Start the terminal (server mode)\n"
+          "  ./opalterm <command>         Send IPC command to running server\n"
           "\n"
           "IPC Commands:\n"
           "  --new-tab, -nt                Open a new tab\n"
@@ -995,7 +995,7 @@ static void print_help(void) {
           "  --right,   -r                 Focus right pane\n"
           "  --help,    -h                 Show this help message\n"
           "\n"
-          "Log: /tmp/kitty-tty.log\n"
+          "Log: /tmp/opalterm.log\n"
           "IPC: %s\n",
           sock_path);
 }
@@ -1041,7 +1041,7 @@ static int ipc_try_client(int argc, char **argv) {
   }
 
   if (argc < 2) {
-    fprintf(stderr, "kitty_tty: server already running.\n"
+    fprintf(stderr, "opalterm: server already running.\n"
                     "Use --new-tab (-nt), --next (-n), --prev (-p),\n"
                     "    --left (-l), --right (-r),\n"
                     "    --split-v (-s), or --help (-h).\n");
@@ -1054,7 +1054,7 @@ static int ipc_try_client(int argc, char **argv) {
     write(sock, cmd, strlen(cmd));
   } else {
     fprintf(stderr,
-            "kitty_tty: unknown command '%s'\n"
+            "opalterm: unknown command '%s'\n"
             "Use --help (-h) to see available commands.\n",
             argv[1]);
     close(sock);
@@ -1207,7 +1207,7 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
 
   log_init();
-  LOG_INFO("kitty-tty starting (server mode)...\n");
+  LOG_INFO("opalterm starting (server mode)...\n");
   atexit(full_cleanup);
   install_signal_handlers();
 
